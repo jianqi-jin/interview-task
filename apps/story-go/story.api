@@ -7,19 +7,19 @@ type (
 		Message string `json:"message"`
 	}
 
-	StoriesRequest {
+	TasksRequest {
 		Keyword string `query:"keyword"` // parameters are auto validated
 	}
 
-	Story {
+	Task {
 		Id          int64  `json:"id,optional"`
 		Name        string `json:"name,optional"`
 		Description string `json:"description,optional"`
 		Data        string `json:"data,optional"`
 		CreateTime  string `json:"create_time,optional"`
 		UpdateTime  string `json:"update_time,optional"`
-		AudioLink   string `json:"audio_link,optional"`
-		AudioUrl    string `json:"audio_Url,optional"`
+		OriImgKey   string `json:"ori_img_key,optional"`
+		ImgUrl      string `json:"img_url,optional"`
 		Status      int32  `json:"status,optional"`
 	}
 	CosCredentials {
@@ -28,21 +28,21 @@ type (
 		SessionToken string `json:"Token,omitempty"`
 	}
 
-	StoryRequest {
-		Story  Story `json:"story,optional"`
-		Random bool  `json:"random,optional"`
+	TaskRequest {
+		Task   Task `json:"task,optional"`
+		Random bool `json:"random,optional"`
 	}
-	StoryDetailRequest {
+	TaskDetailRequest {
 		Id     int64 `form:"id,optional"`
 		Random bool  `form:"random,optional"`
 	}
-	StoryResponse {
+	TaskResponse {
 		Message string `json:"message"`
-		Data    Story  `json:"data"`
+		Data    Task   `json:"data"`
 	}
-	StoriesResponse {
-		Message string  `json:"message"`
-		Data    []Story `json:"data"`
+	TasksResponse {
+		Message string `json:"message"`
+		Data    []Task `json:"data"`
 	}
 	CosCredentialsResponse {
 		Message string         `json:"message"`
@@ -59,22 +59,22 @@ type (
 	}
 )
 
-service story-api {
+service task-api {
 	@handler GreetHandler
 	get /api/v1/from/:name(Request) returns (Response)
 
-	@handler StoriesHandler
-	get /api/v1/stories(StoriesRequest) returns (StoriesResponse)
+	@handler TasksHandler
+	get /api/v1/tasks(TasksRequest) returns (TasksResponse)
 
-	@handler CreateStoryHandler
-	post /api/v1/stories(StoryRequest) returns (StoryResponse)
-	@handler DeleteStoryHandler
-	delete /api/v1/stories(StoryRequest) returns (StoryResponse)
-	@handler UpdateStoryHandler
-	put /api/v1/stories(StoryRequest) returns (StoryResponse)
+	@handler CreateTaskHandler
+	post /api/v1/task(TaskRequest) returns (TaskResponse)
+	@handler DeleteTaskHandler
+	delete /api/v1/task(TaskRequest) returns (TaskResponse)
+	@handler UpdateTaskHandler
+	put /api/v1/task(TaskRequest) returns (TaskResponse)
 
-	@handler StoryHandler
-	get /api/v1/story(StoryDetailRequest) returns (StoryResponse)
+	@handler TaskHandler
+	get /api/v1/task(TaskDetailRequest) returns (TaskResponse)
 
 	@handler CosCredentialsHandler
 	get /api/v1/cos_credentials(CosCredentialsRequest) returns (CosCredentialsResponse)

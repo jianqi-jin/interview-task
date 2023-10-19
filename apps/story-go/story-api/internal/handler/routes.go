@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	"story-api/internal/svc"
+	"task-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
@@ -19,28 +19,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/stories",
-				Handler: StoriesHandler(serverCtx),
+				Path:    "/api/v1/tasks",
+				Handler: TasksHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/v1/stories",
-				Handler: CreateStoryHandler(serverCtx),
+				Path:    "/api/v1/task",
+				Handler: CreateTaskHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodDelete,
-				Path:    "/api/v1/stories",
-				Handler: DeleteStoryHandler(serverCtx),
+				Path:    "/api/v1/task",
+				Handler: DeleteTaskHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPut,
-				Path:    "/api/v1/stories",
-				Handler: UpdateStoryHandler(serverCtx),
+				Path:    "/api/v1/task",
+				Handler: UpdateTaskHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/api/v1/story",
-				Handler: StoryHandler(serverCtx),
+				Path:    "/api/v1/task",
+				Handler: TaskHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,

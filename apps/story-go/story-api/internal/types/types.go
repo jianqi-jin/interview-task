@@ -9,19 +9,19 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-type StoriesRequest struct {
+type TasksRequest struct {
 	Keyword string `query:"keyword"` // parameters are auto validated
 }
 
-type Story struct {
+type Task struct {
 	Id          int64  `json:"id,optional"`
 	Name        string `json:"name,optional"`
 	Description string `json:"description,optional"`
 	Data        string `json:"data,optional"`
 	CreateTime  string `json:"create_time,optional"`
 	UpdateTime  string `json:"update_time,optional"`
-	AudioLink   string `json:"audio_link,optional"`
-	AudioUrl    string `json:"audio_Url,optional"`
+	OriImgKey   string `json:"ori_img_key,optional"`
+	ImgUrl      string `json:"img_url,optional"`
 	Status      int32  `json:"status,optional"`
 }
 
@@ -31,24 +31,24 @@ type CosCredentials struct {
 	SessionToken string `json:"Token,omitempty"`
 }
 
-type StoryRequest struct {
-	Story  Story `json:"story,optional"`
-	Random bool  `json:"random,optional"`
+type TaskRequest struct {
+	Task   Task `json:"task,optional"`
+	Random bool `json:"random,optional"`
 }
 
-type StoryDetailRequest struct {
+type TaskDetailRequest struct {
 	Id     int64 `form:"id,optional"`
 	Random bool  `form:"random,optional"`
 }
 
-type StoryResponse struct {
+type TaskResponse struct {
 	Message string `json:"message"`
-	Data    Story  `json:"data"`
+	Data    Task   `json:"data"`
 }
 
-type StoriesResponse struct {
-	Message string  `json:"message"`
-	Data    []Story `json:"data"`
+type TasksResponse struct {
+	Message string `json:"message"`
+	Data    []Task `json:"data"`
 }
 
 type CosCredentialsResponse struct {

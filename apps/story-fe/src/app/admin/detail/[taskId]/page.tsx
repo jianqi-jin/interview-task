@@ -8,33 +8,33 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import styles from "./index.module.scss";
 import { useEffect, useState } from "react";
-import { storiesApi } from "idl/dist/index";
-import { Story } from "idl/dist/idl/storyComponents";
+import { tasksApi } from "idl/dist/index";
+import { Task } from "idl/dist/idl/taskComponents";
 import { Button, Col, Row, Spin, message } from "antd";
 import { getFileMd5, upload } from "@/utils/upload";
 import { RcFile } from "antd/es/upload";
 
 interface DetailPageProps {
-  params: { storyId: string };
+  params: { taskId: string };
 }
 
 const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
-  const { storyId } = params;
+  const { taskId } = params;
   const query = useSearchParams();
   const router = useRouter();
   const path = usePathname();
-  const [story, setStory] = useState<Story>();
+  const [task, setTask] = useState<Task>();
   const [messageApi] = message.useMessage();
   const [loading, setLoading] = useState(false);
   const fetchDetail = () => {
     setLoading(true);
-    storiesApi
-      .story({
-        id: Number(storyId),
+    tasksApi
+      .task({
+        id: Number(taskId),
         random: false
       })
       .then((res) => {
-        setStory(res.data);
+        setTask(res.data);
       })
       .catch((e) => {
         messageApi.open({
@@ -48,7 +48,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
   };
   useEffect(() => {
     fetchDetail();
-  }, [storyId]);
+  }, [taskId]);
   const handleGenerateAudio = async () => {
     setLoading(true);
     try {
@@ -58,7 +58,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          text: story?.data || "",
+          text: task?.data || "",
         }),
       });
       const tmpBlob = (await res.blob()) as RcFile;
@@ -69,9 +69,9 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
         onProgress: () => {},
       });
       console.log("jjq debug uploadRes", uploadRes);
-      await storiesApi.updateStory({
-        story: {
-          ...story,
+      await tasksApi.updateTask({
+        task: {
+          ...task,
           audio_link: `/audio/${tmpKey}`,
         },
       });
@@ -81,7 +81,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
       setLoading(false);
       fetchDetail();
     }
-    // storiesApi.textToSpeech({}).then((res) => {
+    // tasksApi.textToSpeech({}).then((res) => {
     //   console.log("jjq debug res", res);
     // });
   };
@@ -90,9 +90,9 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
       <Spin spinning={loading}>
         <Button onClick={handleGenerateAudio}>生成语音</Button>
         <ul className="w-[800px] mx-auto">
-          {story &&
-            Object.keys(story).map((key) => {
-              const value = story[key as keyof Story];
+          {task &&
+            Object.keys(task).map((key) => {
+              const value = task[key as keyof Task];
               return (
                 <Row
                   className="shadow-lg rounded-lg mb-5 p-3 overflow-scroll"

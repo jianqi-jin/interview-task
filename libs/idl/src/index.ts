@@ -4,4 +4,4 @@
  * @description index.ts
  */
 
-export * as storiesApi from './idl/story';
+export * as tasksApi from './idl/task';

@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"story-api/internal/svc"
-	"story-api/internal/types"
+	"task-api/internal/svc"
+	"task-api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

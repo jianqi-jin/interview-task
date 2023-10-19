@@ -7,7 +7,7 @@
 
 import AppContext from "@/store";
 import styles from "./index.module.scss";
-import CreateStory from "./CreateStory";
+import CreateTask from "./CreateTask";
 import {
   Button,
   Select,
@@ -20,17 +20,17 @@ import {
 } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useEffect, useRef, useState } from "react";
-import { storiesApi } from "idl";
-import { StoryStatus, StoryStatusText, TagColor } from "@/constant";
+import { tasksApi } from "idl";
+import { TaskStatus, TaskStatusText, TagColor } from "@/constant";
 import confirm from "antd/es/modal/confirm";
-import { Story } from "idl/dist/idl/storyComponents";
+import { Task } from "idl/dist/idl/taskComponents";
 import { useRouter } from "next/navigation";
 
 interface DashboardProps {}
 
-const statusOptions = Object.keys(StoryStatusText).map((item) => {
-  const value = +item as StoryStatus;
-  const label = StoryStatusText[value];
+const statusOptions = Object.keys(TaskStatusText).map((item) => {
+  const value = +item as TaskStatus;
+  const label = TaskStatusText[value];
   return {
     id: value,
     value,
@@ -39,9 +39,9 @@ const statusOptions = Object.keys(StoryStatusText).map((item) => {
 });
 
 const Dashboard: React.FC<DashboardProps> = () => {
-  const { count, setCount, storiesLoading, fetchStories, stories } =
+  const { count, setCount, tasksLoading, fetchStories, tasks } =
     AppContext.useContainer();
-  const [editInfo, setEditInfo] = useState<Story>();
+  const [editInfo, setEditInfo] = useState<Task>();
   const createRef = useRef({
     setIsOpen: (val: boolean) => {}
   });
@@ -49,7 +49,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
     fetchStories();
   }, []);
   const router = useRouter();
-  const columns: ColumnsType<Story> = [
+  const columns: ColumnsType<Task> = [
     {
       key: "id",
       title: "id",
@@ -68,11 +68,11 @@ const Dashboard: React.FC<DashboardProps> = () => {
       render: (val) => {
         return (
           <Typography.Paragraph
-            className={styles.story}
+            className={styles.sask}
             ellipsis={{
               rows: 2,
               tooltip: {
-                overlayClassName: styles.storyTooltip,
+                overlayClassName: styles.saskTooltip,
               },
             }}
           >
@@ -82,18 +82,18 @@ const Dashboard: React.FC<DashboardProps> = () => {
       },
     },
     {
-      key: "story",
-      title: "story",
+      key: "sask",
+      title: "sask",
       dataIndex: "data",
       width: 200,
       render: (val) => {
         return (
           <Typography.Paragraph
-            className={styles.story}
+            className={styles.sask}
             ellipsis={{
               rows: 2,
               tooltip: {
-                overlayClassName: styles.storyTooltip,
+                overlayClassName: styles.saskTooltip,
               },
             }}
           >
@@ -121,7 +121,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
       key: "status",
       title: "status",
       dataIndex: "status",
-      render: (status: StoryStatus, values) => {
+      render: (status: TaskStatus, values) => {
         return (
           <>
             <Select
@@ -131,8 +131,8 @@ const Dashboard: React.FC<DashboardProps> = () => {
               value={status}
               onChange={async (val) => {
                 try {
-                  await storiesApi.updateStory({
-                    story: {
+                  await tasksApi.updateTask({
+                    sask: {
                       ...values,
                       status: val,
                     },
@@ -149,7 +149,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
                   value={item.value}
                 >
                   <div>
-                    <Tag color={TagColor[item.value as StoryStatus]}>
+                    <Tag color={TagColor[item.value as TaskStatus]}>
                       {item.label}
                     </Tag>
                   </div>
@@ -173,7 +173,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
     },
     {
       key: "action",
-      title: "story",
+      title: "sask",
       dataIndex: "data",
       render: (_, rows) => {
         return (
@@ -198,7 +198,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
                   confirm({
                     onOk: async () => {
                       try {
-                        await storiesApi.deleteStory({ story: rows });
+                        await tasksApi.deleteTask({ task: rows });
                       } finally {
                         fetchStories();
                       }
@@ -227,15 +227,15 @@ const Dashboard: React.FC<DashboardProps> = () => {
   return (
     <div className={`${styles.dashboard}`}>
       {/* <h1 className="text-3xl font-bold underline">Stories Dashboard</h1> */}
-      <CreateStory
+      <CreateTask
         // @ts-ignore
         ref={createRef}
         editInfo={editInfo}
         setEditInfo={setEditInfo}
       />
       <div className="rounded-md overflow-hidden border border-black/5 p-8">
-        <Spin spinning={storiesLoading}>
-          <Table columns={columns} rowKey={row => String(row.id)} dataSource={stories} />
+        <Spin spinning={tasksLoading}>
+          <Table columns={columns} rowKey={row => String(row.id)} dataSource={tasks} />
         </Spin>
       </div>
     </div>

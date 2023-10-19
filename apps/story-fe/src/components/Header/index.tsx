@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = () => {
   return <header className={`${styles.Header} py-4 border-slate-900/10 border-b`}>
     <div className={`h-7 backdrop-blur px-6 flex flex-row justify-between`}>
       <div>
-        <a>STORY</a>
+        <a>TASK</a>
       </div>
       <div>
         <nav className="font-semibold">

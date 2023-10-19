@@ -3,7 +3,7 @@ package svc
 import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
-	"story-api/internal/types"
+	"task-api/internal/types"
 )
 var httpClient *resty.Client
 

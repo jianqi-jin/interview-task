@@ -2,11 +2,11 @@ package handler
 
 import (
 	"net/http"
-	"story-api/internal/logic"
+	"task-api/internal/logic"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"story-api/internal/svc"
-	"story-api/internal/types"
+	"task-api/internal/svc"
+	"task-api/internal/types"
 )
 
 func TextToSpeechHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

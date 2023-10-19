@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"story-api/internal/config"
+	"task-api/internal/config"
 )
 
 type ServiceContext struct {

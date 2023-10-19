@@ -2,7 +2,7 @@ package svc
 
 import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	"story-api/internal/config"
+	"task-api/internal/config"
 )
 
 func GetSqlCnn() sqlx.SqlConn {

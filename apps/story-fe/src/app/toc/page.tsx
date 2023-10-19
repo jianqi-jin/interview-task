@@ -7,26 +7,26 @@
 
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
-import { storiesApi } from 'idl';
+import { tasksApi } from 'idl';
 
 interface TocProps {};
 
 const Toc: React.FC<TocProps> = () => {
-  const [story, setStory] = useState('');
-  const fetchStory = () => {
-    storiesApi.story({} as any).then(res => {
-      setStory(res.data?.data || '');
+  const [task, setTask] = useState('');
+  const fetchTask = () => {
+    tasksApi.task({} as any).then(res => {
+      setTask(res.data?.data || '');
     });
   }
   useEffect(() => {
-    fetchStory();
+    fetchTask();
   }, []);
   return <div className={`${styles.TocWrapper} p-4`}>
-    <div className={styles.story}>
-      {story}
+    <div className={styles.task}>
+      {task}
     </div>
     <div className={styles.btn}>
-      <div className={`${styles.btnFull} shadow-sm text-center border`} onClick={fetchStory}>
+      <div className={`${styles.btnFull} shadow-sm text-center border`} onClick={fetchTask}>
         下一篇
       </div>
     </div>

@@ -4,21 +4,21 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"story-api/internal/logic"
-	"story-api/internal/svc"
-	"story-api/internal/types"
+	"task-api/internal/logic"
+	"task-api/internal/svc"
+	"task-api/internal/types"
 )
 
-func StoryHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func CreateTaskHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.StoryDetailRequest
+		var req types.TaskRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewStoryLogic(r.Context(), svcCtx)
-		resp, err := l.Story(&req)
+		l := logic.NewCreateTaskLogic(r.Context(), svcCtx)
+		resp, err := l.CreateTask(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

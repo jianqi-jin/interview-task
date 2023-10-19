@@ -8,9 +8,9 @@ import (
 	"time"
 )
 
-const TableNameTask = "tasks"
+const TableNameTask = "task"
 
-// Task mapped from table <tasks>
+// Task mapped from table <task>
 type Task struct {
 	ID           int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	Name         string    `gorm:"column:name;not null;comment:task名称" json:"name"`                         // task名称

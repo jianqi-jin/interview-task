@@ -1,8 +1,8 @@
 'use client';
 /**
- * @file CreateStory
+ * @file CreateTask
  * @author jjq
- * @description CreateStory
+ * @description CreateTask
  */
 
 import Modal from "@/components/Modal";
@@ -11,20 +11,20 @@ import React, { Dispatch, ForwardedRef, MutableRefObject, SetStateAction, useSta
 // import Button, { BtnType } from "@/components/Button";
 import { Button, Form, Input, message } from 'antd';
 import TextArea from "antd/es/input/TextArea";
-import { storiesApi } from 'idl/dist/index';
+import { tasksApi } from 'idl/dist/index';
 import AppContext from "@/store";
-import { Story } from "idl/dist/idl/storyComponents";
+import { Task } from "idl/dist/idl/taskComponents";
 import Upload from "@/components/Upload";
 
-interface CreateStoryProps {
-  editInfo?: Story;
-  setEditInfo?: Dispatch<SetStateAction<Story | undefined>>;
+interface CreateTaskProps {
+  editInfo?: Task;
+  setEditInfo?: Dispatch<SetStateAction<Task | undefined>>;
 }
 
-const WrappedCreateStory = React.forwardRef(function CreateStory({
+const WrappedCreateTask = React.forwardRef(function CreateTask({
   editInfo,
   setEditInfo,
-}: CreateStoryProps, ref: ForwardedRef<{ setIsOpen: any; }>) {
+}: CreateTaskProps, ref: ForwardedRef<{ setIsOpen: any; }>) {
   const { fetchStories } = AppContext.useContainer();
   const [isOpen, setIsOpen] = useState(false);
   const handleCreate = () => {
@@ -34,11 +34,11 @@ const WrappedCreateStory = React.forwardRef(function CreateStory({
   ref && (ref.current = {
     setIsOpen
   });
-  const handleSubmit = async (values: Story) => {
+  const handleSubmit = async (values: Task) => {
     try {
-      let api = editInfo ? storiesApi.updateStory : storiesApi.createStory;
+      let api = editInfo ? tasksApi.updateTask : tasksApi.createTask;
       const res = await api({
-        story: {
+        task: {
           ...editInfo,
           ...values
         }
@@ -60,7 +60,7 @@ const WrappedCreateStory = React.forwardRef(function CreateStory({
     }, 6e2);
   }
   return (
-    <div className={styles.CreateStoryWrapper}>
+    <div className={styles.CreateTaskWrapper}>
       <button
         onClick={handleCreate}
         className="cursor-pointer bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-2 rounded-md"
@@ -68,7 +68,7 @@ const WrappedCreateStory = React.forwardRef(function CreateStory({
         Create
       </button>
       <Modal
-        title={`Story ${editInfo ? 'editing' : 'creating'}...`}
+        title={`Task ${editInfo ? 'editing' : 'creating'}...`}
         isOpen={isOpen}
         onClose={onModalClose}
       >
@@ -108,7 +108,7 @@ const WrappedCreateStory = React.forwardRef(function CreateStory({
               <Input placeholder="请填写描述" />
             </Form.Item>
             <Form.Item
-              label="story"
+              label="task"
               name="data"
               rules={[{ required: true, message: '此项必填' }]}
               required
@@ -129,4 +129,4 @@ const WrappedCreateStory = React.forwardRef(function CreateStory({
   );
 });
 
-export default WrappedCreateStory;
+export default WrappedCreateTask;

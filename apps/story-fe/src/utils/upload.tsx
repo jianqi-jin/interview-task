@@ -1,5 +1,5 @@
 import { RcFile } from "antd/es/upload";
-import { storiesApi } from "idl";
+import { tasksApi } from "idl";
 import SparkMD5 from 'spark-md5';
 var COS = require('cos-js-sdk-v5');
 
@@ -13,7 +13,7 @@ export const upload = async ({
     var cos = new COS({
       // getAuthorization 必选参数
       getAuthorization: async (options: any, callback: any) => {
-        const credentials = await storiesApi.cosCredentials({ key });
+        const credentials = await tasksApi.cosCredentials({ key });
         const data = credentials.data;
         callback({
           TmpSecretId: data.TmpSecretId,

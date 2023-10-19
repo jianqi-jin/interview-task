@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"story-api/internal/logic"
-	"story-api/internal/svc"
-	"story-api/internal/types"
+	"task-api/internal/logic"
+	"task-api/internal/svc"
+	"task-api/internal/types"
 )
 
 func GreetHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

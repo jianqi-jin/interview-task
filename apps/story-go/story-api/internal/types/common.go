@@ -1,8 +1,8 @@
 package types
 
 var (
-	StoryStatusUnknow  = 0
-	StoryStatusInit    = 1
-	StoryStatusSuccess = 2
-	StoryStatusFailed  = 3
+	TaskStatusUnknow  = 0
+	TaskStatusInit    = 1
+	TaskStatusSuccess = 2
+	TaskStatusFailed  = 3
 )

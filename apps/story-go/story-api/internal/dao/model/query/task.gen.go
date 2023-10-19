@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"story-api/internal/dao/model/model"
+	"task-api/internal/dao/model/model"
 )
 
 func newTask(db *gorm.DB, opts ...gen.DOOption) task {

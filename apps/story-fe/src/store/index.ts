@@ -1,7 +1,7 @@
 'use client'
 import { message } from 'antd';
-import { storiesApi } from 'idl/dist/index';
-import { Story } from 'idl/dist/idl/storyComponents';
+import { tasksApi } from 'idl/dist/index';
+import { Task } from 'idl/dist/idl/taskComponents';
 /**
  * @file store/index.ts
  * @author jjq
@@ -13,11 +13,11 @@ import { createContainer } from 'unstated-next';
 
 const useAppContext = () => {
   const [count, setCount] = useState(0);
-  const [storiesLoading, setStoriesLoading] = useState(true);
-  const [stories, setStories] = useState<Story[]>([]);
+  const [tasksLoading, setStoriesLoading] = useState(true);
+  const [tasks, setStories] = useState<Task[]>([]);
   const fetchStories = () => {
     setStoriesLoading(true);
-    storiesApi.stories({}).then(res => {
+    tasksApi.tasks({}).then(res => {
       setStories(res?.data || []);
     }).catch(e => {
       message.error(e.message || '网络错误');
@@ -29,8 +29,8 @@ const useAppContext = () => {
     count,
     setCount,
     fetchStories,
-    stories,
-    storiesLoading
+    tasks,
+    tasksLoading
   };
 };
 

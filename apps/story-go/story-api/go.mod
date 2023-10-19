@@ -1,9 +1,12 @@
-module story-api
+module task-api
 
 go 1.19
 
 require (
+	github.com/go-resty/resty/v2 v2.7.0
 	github.com/spf13/viper v1.16.0
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.41
+	github.com/tencentyun/qcloud-cos-sts-sdk v0.0.0-20230614023614-3c390abe0dd8
 	github.com/zeromicro/go-zero v1.5.3
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/gen v0.3.22
@@ -12,7 +15,6 @@ require (
 )
 
 require (
-	github.com/Microsoft/cognitive-services-speech-sdk-go v1.29.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
@@ -21,7 +23,6 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/go-resty/resty/v2 v2.7.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
@@ -49,8 +50,6 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
-	github.com/tencentyun/cos-go-sdk-v5 v0.7.41 // indirect
-	github.com/tencentyun/qcloud-cos-sts-sdk v0.0.0-20230614023614-3c390abe0dd8 // indirect
 	go.opentelemetry.io/otel v1.14.0 // indirect
 	go.opentelemetry.io/otel/exporters/jaeger v1.14.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/internal/retry v1.14.0 // indirect

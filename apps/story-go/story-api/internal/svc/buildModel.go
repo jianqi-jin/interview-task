@@ -1,37 +1,37 @@
 package svc
 
 import (
-	"story-api/internal/dao/model/model"
-	"story-api/internal/types"
 	"strconv"
+	"task-api/internal/dao/model/model"
+	"task-api/internal/types"
 )
 
 var (
-	AudioCdnPrefix="https://audio.compencat.com"
+	AudioCdnPrefix = "https://audio.compencat.com"
 )
 
-func BuildStory(instance *model.Story) *types.Story {
-	return &types.Story{
+func BuildTask(instance *model.Task) *types.Task {
+	return &types.Task{
 		Id:          instance.ID,
 		Name:        instance.Name,
 		Status:      instance.Status,
 		Description: instance.Description,
 		CreateTime:  strconv.FormatInt(instance.CreateTime.Unix(), 10),
 		UpdateTime:  strconv.FormatInt(instance.UpdateTime.Unix(), 10),
-		AudioLink: instance.AudioLink,
-		AudioUrl: AudioCdnPrefix + instance.AudioLink,
+		OriImgKey:   instance.OriImgKey,
+		ImgUrl:      AudioCdnPrefix + instance.OriImgKey,
 		Data:        instance.Data,
 	}
 }
 
-func BuildStoryDB(instance *types.Story) *model.Story {
-	return &model.Story{
+func BuildTaskDB(instance *types.Task) *model.Task {
+	return &model.Task{
 		ID:          instance.Id,
 		Name:        instance.Name,
 		Description: instance.Description,
 		Data:        instance.Data,
 		Status:      instance.Status,
-		AudioLink: instance.AudioLink,
+		OriImgKey:   instance.OriImgKey,
 		//Channel:     "",
 		//Source:      "",
 		//CreateTime:  instance.CreateTime,

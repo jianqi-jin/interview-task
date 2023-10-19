@@ -4,7 +4,7 @@ package db
 
 import (
 	"fmt"
-	"story-api/internal/dao/model/query"
+	"task-api/internal/dao/model/query"
 
 	"gorm.io/driver/mysql"
 

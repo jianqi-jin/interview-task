@@ -3,8 +3,8 @@
   # password = your-password
   # host = 0.0.0.0
   # port = 3308
-  # database = story
-  dataSource = root:Story_13456@tcp(0.0.0.0:3308)/story
+  # database = task
+  dataSource = root:Task_13456@tcp(0.0.0.0:3308)/task
 [cos]
   ak = AKIDhFavKrJk7PcilmoEUejZBSkqlbP7g2FH
   sk = weGpNtNDvRr7BAxbBnmqoxGbHp1AAAA0
