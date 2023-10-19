@@ -12,7 +12,7 @@ services:
     volumes:
       - ./tmp/log:/app/tmp/log
     ports:
-      - 18005:18005
+      - 18006:18005
     restart: always
     depends_on:
       - db
@@ -28,7 +28,7 @@ services:
     volumes:
       - ~/log/server:/crawler/server/tmp
     ports:
-      - "3000:3000"
+      - "3001:3000"
     # networks:
     #   - mynetwork
   db:
@@ -44,7 +44,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     ports:
-      - "3308:3306"
+      - "3307:3306"
     # networks:
     #   - mynetwork
   nginx:

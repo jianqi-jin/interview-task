@@ -103,3 +103,13 @@ df -m
 docker exec -it story_db bash
 mysql -uroot -p123456 story
 ```
+
+You need setup the whistle config:
+
+```
+interview.org/api/ localhost:18005/api/
+interview.org/ localhost:3000/
+```
+
+
+And open this link to review this project: http://interview.org/
