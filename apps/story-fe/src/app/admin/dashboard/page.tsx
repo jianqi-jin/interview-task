@@ -68,11 +68,11 @@ const Dashboard: React.FC<DashboardProps> = () => {
       render: (val) => {
         return (
           <Typography.Paragraph
-            className={styles.sask}
+            className={styles.task}
             ellipsis={{
               rows: 2,
               tooltip: {
-                overlayClassName: styles.saskTooltip,
+                overlayClassName: styles.taskTooltip,
               },
             }}
           >
@@ -82,18 +82,18 @@ const Dashboard: React.FC<DashboardProps> = () => {
       },
     },
     {
-      key: "sask",
-      title: "sask",
+      key: "task",
+      title: "task",
       dataIndex: "data",
       width: 200,
       render: (val) => {
         return (
           <Typography.Paragraph
-            className={styles.sask}
+            className={styles.task}
             ellipsis={{
               rows: 2,
               tooltip: {
-                overlayClassName: styles.saskTooltip,
+                overlayClassName: styles.taskTooltip,
               },
             }}
           >
@@ -132,7 +132,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
               onChange={async (val) => {
                 try {
                   await tasksApi.updateTask({
-                    sask: {
+                    task: {
                       ...values,
                       status: val,
                     },
@@ -173,7 +173,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
     },
     {
       key: "action",
-      title: "sask",
+      title: "task",
       dataIndex: "data",
       render: (_, rows) => {
         return (

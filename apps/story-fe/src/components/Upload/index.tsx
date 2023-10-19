@@ -6,9 +6,10 @@ import { RcFile } from "antd/es/upload";
 
 const { Dragger } = Upload;
 
-const MyUpload: React.FC<{ value?: string; onChange?: any }> = ({
+const MyUpload: React.FC<{ value?: string; onChange?: any; onSuccess?: (key: string) => void }> = ({
   onChange,
   value,
+  onSuccess
 }) => {
   const [fileList, setFileList] = useState<any[]>(value ? [{ 
     uid: '-1',
@@ -22,20 +23,21 @@ const MyUpload: React.FC<{ value?: string; onChange?: any }> = ({
   useEffect(() => {
     stateRef.current.onChange = onChange;
   }, [onChange]);
-  const handleUpload: (options: any) => void = async ({ file, onProgress, onError, onSuccess }) => {
+  const handleUpload: (options: any) => void = async ({ file, onProgress, onError, onSuccess: onSuc }) => {
     try {
       if (!file) {
         return;
       }
       const key = await getFileMd5(file as RcFile);
-      stateRef.current.onChange?.(`/audio/${key}`);
-      console.log("jjq debug key", key);
+      const bindedKey = `/audio/${key}`;
+      stateRef.current.onChange?.(bindedKey);
       await upload({
         key,
         file: file as RcFile,
         onProgress,
       });
-      onSuccess?.({});
+      onSuc?.({});
+      onSuccess?.(bindedKey);
     } catch (e) {
       console.error(e);
       onError?.(e as any);
@@ -51,7 +53,6 @@ const MyUpload: React.FC<{ value?: string; onChange?: any }> = ({
       onChange={async (info) => {
         let newFileList = [info.file];
         setFileList(newFileList);
-        // console.log('jjq debug onChange');
         const { status } = info.file;
         if (status !== "uploading") {
           console.log(info.file, info.fileList);

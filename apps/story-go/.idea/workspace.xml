@@ -6,55 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ca438dc6-6edf-47f9-9a20-d811e7bb2e3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/dao/model/users.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/dao/query/gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/dao/query/users.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/etc/story-api.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/etc/story-api.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/config/mysql.yml" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/config/mysql.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/db/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/dao/db/mysql.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/model/ history.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/model/ tasks.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/model/history.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/model/stories.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/model/tasks.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/model/users.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/query/ history.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/query/ tasks.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/query/gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/query/history.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/query/stories.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/query/tasks.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/dao/model/query/users.gen.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/coscredentialshandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/handler/coscredentialshandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/createstoryhandler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/deletestoryhandler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/greethandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/handler/greethandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/handler/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/storieshandler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/storyhandler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/texttospeechhandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/handler/texttospeechhandler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/handler/updatestoryhandler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/coscredentialslogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/logic/coscredentialslogic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/createstorylogic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/deletestorylogic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/greetlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/logic/greetlogic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/storieslogic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/storylogic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/texttospeechlogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/logic/texttospeechlogic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/updatestorylogic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/svc/buildModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/svc/buildModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/svc/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/svc/request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/svc/servicecontext.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/svc/servicecontext.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/svc/servicedb.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/svc/servicedb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/types/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/types/common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/internal/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/types/types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/story.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/story-api/update_db.sh" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/update_db.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/story.api" beforeDir="false" afterPath="$PROJECT_DIR$/story.api" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -68,7 +68,7 @@ export async function request({
     data?: unknown;
     config?: unknown;
 }) {
-    const response = await fetch(url, {
+    const response = await fetch('http://localhost:8888' + url, {
         method: method.toLocaleUpperCase(),
         credentials: 'include',
         headers: {

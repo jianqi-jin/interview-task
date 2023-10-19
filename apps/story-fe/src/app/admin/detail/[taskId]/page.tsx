@@ -7,12 +7,14 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import styles from "./index.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { tasksApi } from "idl/dist/index";
 import { Task } from "idl/dist/idl/taskComponents";
-import { Button, Col, Row, Spin, message } from "antd";
+import { Button, Col, Row, Space, Spin, message } from "antd";
 import { getFileMd5, upload } from "@/utils/upload";
 import { RcFile } from "antd/es/upload";
+import MyUpload from "@/components/Upload";
+import { useRequest } from "ahooks";
 
 interface DetailPageProps {
   params: { taskId: string };
@@ -31,7 +33,7 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
     tasksApi
       .task({
         id: Number(taskId),
-        random: false
+        random: false,
       })
       .then((res) => {
         setTask(res.data);
@@ -85,11 +87,41 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
     //   console.log("jjq debug res", res);
     // });
   };
+  const [showUpload, setShowUpload] = useState(false);
+  const handleImgChangeService = (img: string) => {
+    setShowUpload(false);
+    updateImg(`https://audio.compencat.com${img}`);
+    return tasksApi.updateTask({
+      task: {
+        ...task,
+        ori_img_key: img,
+      },
+    });
+  };
+  useEffect(() => {
+    console.log(task?.img_url);
+    updateImg(task?.img_url);
+  }, [task]);
+  const { run: handleImgChange, loading: updating } = useRequest(
+    handleImgChangeService,
+    {
+      manual: true,
+    }
+  );
+  const canvasRef = useRef<HTMLCanvasElement>();
+  const updateImg = (imgUrl: string) => {
+    const ctx = canvasRef.current?.getContext("2d");
+    const img = new Image();
+    img.onload = () => {
+      ctx?.drawImage(img, 0, 0);
+    };
+    img.src = imgUrl;
+  };
   return (
     <div className={styles.DetailPageWrapper}>
-      <Spin spinning={loading}>
-        <Button onClick={handleGenerateAudio}>生成语音</Button>
-        <ul className="w-[800px] mx-auto">
+      <Spin spinning={loading || updating}>
+        {/* <Button onClick={handleGenerateAudio}>生成语音</Button> */}
+        {/* <ul className="w-[800px] mx-auto">
           {task &&
             Object.keys(task).map((key) => {
               const value = task[key as keyof Task];
@@ -103,7 +135,18 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
                 </Row>
               );
             })}
-        </ul>
+        </ul> */}
+        <canvas width={800} height={800} ref={canvasRef}></canvas>
+        <Space size={8}>
+          <Button type="primary" onClick={handleGenerateAudio}>
+            Save Task
+          </Button>
+          {showUpload ? (
+            <MyUpload onSuccess={handleImgChange} />
+          ) : (
+            <Button onClick={() => setShowUpload(true)}>Upload Image</Button>
+          )}
+        </Space>
       </Spin>
     </div>
   );
