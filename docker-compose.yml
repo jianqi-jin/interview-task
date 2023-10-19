@@ -8,7 +8,7 @@ services:
       # args:
       #   - GIT_USERNAME=${GIT_USERNAME}
       #   - GIT_TOKEN=${GIT_TOKEN}
-    image: 2359634711/story_api:latest
+    image: 2359634711/interview_api:latest
     volumes:
       - ./tmp/log:/app/tmp/log
     ports:
@@ -19,8 +19,8 @@ services:
     # networks:
     #   - mynetwork
   node:
-    image: 2359634711/story_node:latest
-    container_name: story_node
+    image: 2359634711/interview_node:latest
+    container_name: interview_node
     build:
       context: .
       dockerfile: Dockerfile.node
@@ -35,8 +35,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.db
-    image: 2359634711/story_db:latest
-    container_name: story_db
+    image: 2359634711/interview_db:latest
+    container_name: interview_db
     volumes:
       - ~/opt/data:/var/lib/mysql
       - ~/opt/log:/var/log/mysql
