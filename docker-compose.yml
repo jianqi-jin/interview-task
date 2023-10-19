@@ -38,9 +38,9 @@ services:
     image: 2359634711/interview_db:latest
     container_name: interview_db
     volumes:
-      - ~/opt/data:/var/lib/mysql
-      - ~/opt/log:/var/log/mysql
-      - ~/opt/mysql-files:/var/lib/mysql-files
+      - ~/opt/interview_data:/var/lib/mysql
+      - ~/opt/interview_log:/var/log/mysql
+      - ~/opt/interview_mysql-files:/var/lib/mysql-files
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     ports:
