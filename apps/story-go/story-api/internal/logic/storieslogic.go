@@ -32,7 +32,7 @@ func (l *StoriesLogic) Stories(ctx context.Context, req *types.StoriesRequest) (
 	//storiesModel := db.NewStoriesModel(db2.SqlConn)
 	//storiesModel.FindOne()
 	var instances []*model.Story
-	instances, err = db.Q.WithContext(ctx).Story.Order(db.Q.Story.CreateTime.Desc()).Find()
+	instances, err = db.Q.WithContext(ctx).Task.Order(db.Q.Story.CreateTime.Desc()).Find()
 	if err != nil {
 		return nil, err
 	}

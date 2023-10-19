@@ -3,8 +3,8 @@ mysql:
   max_idle_conn: 60
   max_open_conn: 10
   # addr: db:3306
-  addr: 152.136.56.221:3308
+  addr: 152.136.56.221:3307
   #addr: 0.0.0.0:3308
-  name: story
+  name: interview
   user: root
-  pwd:  Story_13456
+  pwd:  Interview_13456
