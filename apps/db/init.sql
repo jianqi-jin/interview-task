@@ -29,6 +29,20 @@ CREATE TABLE `tasks` (
   KEY `update_time` (`update_time`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1151165 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+CREATE TABLE `history` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `task_id` bigint unsigned NOT NULL COMMENT 'task id',
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT 'json详细信息',
+  `version` int NOT NULL COMMENT 'history 相对于mask的 version',
+  `is_active` int NOT NULL DEFAULT '1' COMMENT '是否是当前版本 1 当前版本 0 历史版本',
+  `create_time` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `update_time` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  `status` int NOT NULL COMMENT '1=待审核, 2=审核通过, 3=审核失败',
+  PRIMARY KEY (`id`),
+  KEY `update_time` (`update_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=1151165 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 use mysql;
 create user 'read_only'@'%' identified WITH mysql_native_password by 'Interview_read_13456';
 flush privileges;
