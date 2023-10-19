@@ -1,0 +1,10 @@
+mysql:
+  conn_max_lifetime: 500
+  max_idle_conn: 60
+  max_open_conn: 10
+  # addr: db:3306
+  addr: 152.136.56.221:3308
+  #addr: 0.0.0.0:3308
+  name: story
+  user: root
+  pwd:  Story_13456

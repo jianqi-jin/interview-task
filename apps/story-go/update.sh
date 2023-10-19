@@ -1,0 +1,1 @@
+goctl api go -api story.api -dir story-api

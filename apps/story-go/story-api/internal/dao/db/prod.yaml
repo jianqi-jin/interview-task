@@ -1,0 +1,8 @@
+mysql:
+  conn_max_lifetime: 5
+  max_idle_conn: 60
+  max_open_conn: 10
+  # addr: TODO: edit of remove this field
+  # name: TODO: edit of remove this field
+  # user: TODO: edit of remove this field
+  # pwd:  TODO: edit of remove this field

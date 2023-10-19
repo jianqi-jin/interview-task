@@ -1,0 +1,16 @@
+.TocWrapper {
+  height: 100vh;
+  display: flex;
+  font-size: 2rem;
+  flex-direction: column;
+  .story {
+    flex-grow: 1;
+  }
+  .btn {
+    flex-grow: 0;
+    .btnFull {
+      width: 100%;
+      padding: .5rem 0;
+    }
+  }
+}

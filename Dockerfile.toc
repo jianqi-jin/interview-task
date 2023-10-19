@@ -1,0 +1,25 @@
+FROM node:16.20
+
+# 设置工作目录
+WORKDIR /var/www/app
+# RUN npm config set registry https://registry.npm.taobao.org
+# 安装Next.js
+RUN npm install --global pnpm
+
+# 拷贝应用程序代码
+COPY . .
+
+# 暴露端口
+EXPOSE 3000
+CMD ["cd", "/var/www/app"]
+
+# 安装应用程序依赖项
+RUN pnpm --filter idl install
+RUN pnpm --filter story-fe install
+RUN pnpm --filter idl build
+RUN pnpm --filter story-fe build
+
+# 启动应用程序
+CMD ["ls"]
+CMD ["pnpm", "--filter", "story-fe", "start"]
+# CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]

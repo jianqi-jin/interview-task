@@ -1,0 +1,10 @@
+[mysql]
+  # user = root
+  # password = your-password
+  # host = 0.0.0.0
+  # port = 3308
+  # database = story
+  dataSource = root:Story_13456@tcp(0.0.0.0:3308)/story
+[cos]
+  ak = AKIDhFavKrJk7PcilmoEUejZBSkqlbP7g2FH
+  sk = weGpNtNDvRr7BAxbBnmqoxGbHp1AAAA0
