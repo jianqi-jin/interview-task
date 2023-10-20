@@ -41,6 +41,9 @@ const DetailPageInner: React.FC<DetailPageProps> = ({ params }) => {
     currentStep,
     totalStep,
     isPlaying,
+    FabricCanvas,
+    canvas,
+    canvasRef,
   } = useContainer(MaskState);
   const fetchDetail = () => {
     setLoading(true);
@@ -110,7 +113,10 @@ const DetailPageInner: React.FC<DetailPageProps> = ({ params }) => {
     updateImg(task?.img_url);
     try {
       const json = task?.data || "{}";
-      setMaskData(JSON.parse(json));
+      const jsonData = JSON.parse(json);
+      canvas?.loadFromJSON(jsonData).then(() => {
+        canvas.renderAll();
+      });
     } catch (e) {}
   }, [task]);
   const { run: handleImgChange, loading: updating } = useRequest(
@@ -125,31 +131,15 @@ const DetailPageInner: React.FC<DetailPageProps> = ({ params }) => {
     FabricImage.fromURL(imgUrl).then((oImg: FabricImage) => {
       canvas!.backgroundImage = oImg;
       canvas?.renderAll();
-      // canvas?.add(oImg);
     });
   };
-  const readingTimer = useRef<NodeJS.Timeout>();
-  const { FabricCanvas, canvas, createCanvas, canvasRef } = useFabric();
-  useEffect(() => {
-    if (readingTimer.current) {
-      return;
-    }
-    console.log("Writing canvas");
-    canvas?.loadFromJSON(maskData).then(() => {
-      canvas?.renderAll();
-    });
-  }, [maskData]);
   const handleCanvasChange = (canvasData: any) => {
     console.log("Reading canvas");
-    clearTimeout(readingTimer.current);
-    readingTimer.current = setTimeout(() => {
-      readingTimer.current = undefined;
-    }, 6e2);
     console.log("canvasData", canvasData);
     setMaskData(canvasData);
   };
   const handleClear = () => {
-    setMaskData({});
+    canvas?.clear();
   };
   const handleDownload = () => {
     let a = document.createElement("a");

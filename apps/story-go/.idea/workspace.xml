@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca438dc6-6edf-47f9-9a20-d811e7bb2e3e" name="Changes" comment="" />
+    <list default="true" id="ca438dc6-6edf-47f9-9a20-d811e7bb2e3e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../story-fe/src/app/admin/detail/[taskId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../story-fe/src/app/admin/detail/[taskId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../story-fe/src/components/Fabric/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../story-fe/src/components/Fabric/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../story-fe/src/store/Mask.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../story-fe/src/store/Mask.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/story-api/internal/logic/createtasklogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/story-api/internal/logic/createtasklogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../libs/idl/src/idl/gocliRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../libs/idl/src/idl/gocliRequest.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,11 +99,6 @@
           <url>file://$PROJECT_DIR$/story-api/internal/logic/registerlogic.go</url>
           <line>32</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/story-api/internal/logic/userinfologic.go</url>
-          <line>30</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

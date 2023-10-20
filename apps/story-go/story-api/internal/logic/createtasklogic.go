@@ -30,6 +30,7 @@ func newTaskInstance(task *types.Task) *model.Task {
 	res.Name = task.Name
 	res.Description = task.Description
 	res.Data = task.Data
+	res.OriImgKey = task.OriImgKey
 	//res.AudioLink = task.AudioLink
 	return res
 }

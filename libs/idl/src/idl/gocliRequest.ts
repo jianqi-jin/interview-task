@@ -72,7 +72,7 @@ export async function request({
 }) {
     const jwt = Cookies.get('jwt');
     const response = await fetch(
-        // 'http://localhost:8888' + 
+        // 'http://localhost:18005' + 
         url, {
         method: method.toLocaleUpperCase(),
         credentials: 'include',

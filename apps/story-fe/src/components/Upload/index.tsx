@@ -30,13 +30,13 @@ const MyUpload: React.FC<{ value?: string; onChange?: any; onSuccess?: (key: str
       }
       const key = await getFileMd5(file as RcFile);
       const bindedKey = `/audio/${key}`;
-      stateRef.current.onChange?.(bindedKey);
       await upload({
         key,
         file: file as RcFile,
         onProgress,
       });
       onSuc?.({});
+      stateRef.current.onChange?.(bindedKey);
       onSuccess?.(bindedKey);
     } catch (e) {
       console.error(e);

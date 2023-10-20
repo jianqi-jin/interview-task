@@ -43,13 +43,13 @@ const WrappedCreateTask = React.forwardRef(function CreateTask({
           ...values
         }
       });
-      message.success('操作成功');
+      message.success('Success!');
       fetchStories();
       setIsOpen(false);
     }
     catch (e) {
       // @ts-ignore
-      message.error(e?.message || '网络错误');
+      message.error(e?.message || 'Network error.');
     }
   };
 
@@ -74,7 +74,7 @@ const WrappedCreateTask = React.forwardRef(function CreateTask({
       >
         <div className="mt-2">
           <p className="text-sm text-gray-500">
-            请填写故事内容
+            How do you like drawing?
           </p>
         </div>
         
@@ -95,29 +95,29 @@ const WrappedCreateTask = React.forwardRef(function CreateTask({
               label="name"
               name="name"
               required
-              rules={[{ required: true, message: '此项必填' }]}
+              rules={[{ required: true, message: 'required' }]}
             >
-              <Input placeholder="请填写name" />
+              <Input placeholder="name" />
             </Form.Item>
             <Form.Item
               label="description"
               name="description"
               required
-              rules={[{ required: true, message: '此项必填' }]}
+              rules={[{ required: true, message: 'required' }]}
             >
-              <Input placeholder="请填写描述" />
+              <Input placeholder="description" />
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
               label="task"
               name="data"
-              rules={[{ required: true, message: '此项必填' }]}
+              rules={[{ required: true, message: 'required' }]}
               required
             >
               <TextArea placeholder="请填写故事内容" rows={10}></TextArea>
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item
-              label="audio file"
-              name="audio_link"
+              label="img file"
+              name="ori_img_key"
             >
               <Upload />
             </Form.Item>

@@ -1,14 +1,11 @@
 "use client";
 import { MaskData } from "@/interface";
-import { MaskState } from "@/store/Mask";
 import { Canvas, PencilBrush } from "fabric";
 import { RefObject, useEffect, useRef, useState } from "react";
-import { useContainer } from "unstated-next";
 
-export const useFabric = () => {
+export const useFabric = ({ maskData }: { maskData: MaskData }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [canvas, setCanvas] = useState<Canvas>();
-  const { maskData } = useContainer(MaskState);
   const createCanvas = () => {
     var canvas = new Canvas(canvasRef.current!);
     canvas.isDrawingMode = true;

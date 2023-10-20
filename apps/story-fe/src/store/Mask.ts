@@ -1,5 +1,6 @@
 // Jianqi
 
+import { useFabric } from "@/components/Fabric";
 import { MaskData } from "@/interface";
 import { delay } from "@/utils";
 import { useEffect, useRef, useState } from "react";
@@ -7,6 +8,7 @@ import { createContainer } from "unstated-next";
 
 const useMaskState = () => {
   const [maskData, setMaskData] = useState<MaskData>({});
+  const { FabricCanvas, canvas, createCanvas, canvasRef } = useFabric({ maskData });
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [totalStep, setTotalStep] = useState(0);
@@ -31,17 +33,21 @@ const useMaskState = () => {
       for (const item of maskData.objects) {
         if (isCancel) {
           setIsPlaying(false);
-          setMaskData({
+          canvas?.loadFromJSON({
             ...copyMaskData,
+          }).then(() => {
+            canvas.renderAll();
           });
           return;
         }
         setCurrentStep((val) => val + 1);
         newObjects.push(item);
-        setMaskData({
+        canvas?.loadFromJSON({
           ...maskData,
           objects: newObjects,
-        });
+        }).then(() => {
+            canvas.renderAll();
+          });
         await delay(1e3);
       }
       setIsPlaying(false);
@@ -51,10 +57,12 @@ const useMaskState = () => {
   };
   const rollbackMaskData = (idx: number) => {
     const objects = maskData?.objects?.splice?.(0, idx + 1) || [];
-    setMaskData({
+    canvas?.loadFromJSON({
       ...maskData,
       objects: objects,
-    });
+    }).then(() => {
+        canvas.renderAll();
+      });
   };
   return {
     maskData,
@@ -65,6 +73,10 @@ const useMaskState = () => {
     rollbackMaskData,
     currentStep,
     setCurrentStep,
+    FabricCanvas,
+    canvas,
+    createCanvas,
+    canvasRef,
   };
 };
 

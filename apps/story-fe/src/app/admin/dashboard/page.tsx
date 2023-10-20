@@ -11,6 +11,7 @@ import CreateTask from "./CreateTask";
 import {
   Button,
   Image,
+  Popconfirm,
   Select,
   Space,
   Spin,
@@ -187,35 +188,32 @@ const Dashboard: React.FC<DashboardProps> = () => {
                     createRef.current.setIsOpen(true);
                 }}
               >
-                编辑
-              </Button>
-              <Button
-                type="primary"
-                key="delete"
-                onClick={() => {
-                  confirm({
-                    onOk: async () => {
-                      try {
-                        await tasksApi.deleteTask({ task: rows });
-                      } finally {
-                        fetchStories();
-                      }
-                    },
-                    onCancel: () => {},
-                    content: "确定删除吗？",
-                    okText: "确定删除",
-                    cancelText: "点错了",
-                  });
-                }}
-              >
-                删除
+                Edit
               </Button>
               <Button
                 key="detail"
                 onClick={() => router.push(`/admin/detail/${rows.id}`)}
               >
-                详情
+                Detail
               </Button>
+              <Popconfirm
+                title="Delete the task"
+                description="Are you sure to delete this task?"
+                onConfirm={async () => {
+                  try {
+                    await tasksApi.deleteTask({ task: rows });
+                  } finally {
+                    fetchStories();
+                  }
+                }}
+                // onCancel={cancel}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="primary" danger key="delete">
+                  Delete
+                </Button>
+              </Popconfirm>
             </Space>
           </>
         );
