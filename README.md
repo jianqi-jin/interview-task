@@ -1,6 +1,24 @@
 # DRAW
 
-## run client
+## Build and Run
+
+#### build
+
+```
+docker-compose build --no-cache
+```
+
+#### run
+
+```
+docker-compose up
+```
+
+The contents blow this line are not for running this projet, it is for development.
+
+## Development
+
+#### run client
 
 ```
 pnpm --filter draw-fe dev
@@ -12,25 +30,25 @@ sh ./scripts/build_client.sh
 docker-compose up -d --no-deps --build node
 ```
 
-## build db
+#### build db
 ```
 docker-compose up -d --no-deps --build db 
 ```
 
-## 查看log
+#### 查看log
 
 ```
  docker-compose logs -f node
 ```
 
 
-## 查看进程
+#### 查看进程
 
 ```
 docker ps
 ```
 
-## 数据库操作
+#### 数据库操作
 
 删除数据
 ```
