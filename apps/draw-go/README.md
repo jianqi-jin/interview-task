@@ -1,4 +1,4 @@
-# story-api
+# draw-api
 
 更新 idl
 ```
@@ -8,13 +8,13 @@ sh update.sh
 安装mod
 
 ```
-cd ./story-api
+cd ./draw-api
 go mod tidy
 ```
 
 运行
 ```
-go run story.go -f etc/story-api.yaml
+go run draw.go -f etc/draw-api.yaml
 ```
 
 升级db model

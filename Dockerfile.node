@@ -15,11 +15,11 @@ CMD ["cd", "/var/www/app"]
 
 # 安装应用程序依赖项
 RUN pnpm --filter idl install
-RUN pnpm --filter story-fe install
+RUN pnpm --filter draw-fe install
 RUN pnpm --filter idl build
-RUN pnpm --filter story-fe build
+RUN pnpm --filter draw-fe build
 
 # 启动应用程序
 CMD ["ls"]
-CMD ["pnpm", "--filter", "story-fe", "start"]
+CMD ["pnpm", "--filter", "draw-fe", "start"]
 # CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]

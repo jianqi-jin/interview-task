@@ -1,0 +1,1 @@
+goctl api go -api draw.api -dir draw-api

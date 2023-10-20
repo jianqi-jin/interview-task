@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "idl": "goctl api ts --api ../../apps/story-go/story.api --dir ./src/idl",
+    "idl": "goctl api ts --api ../../apps/draw-go/draw.api --dir ./src/idl",
     "build": "tsc -p ./tsconfig.json"
   },
   "keywords": [],

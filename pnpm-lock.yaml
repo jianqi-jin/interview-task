@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  apps/story-fe:
+  apps/draw-fe:
     dependencies:
       '@ant-design/icons':
         specifier: ^5.1.4

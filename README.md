@@ -1,9 +1,9 @@
-# STORY
+# DRAW
 
 ## run client
 
 ```
-pnpm --filter story-fe dev
+pnpm --filter draw-fe dev
 ```
 
 build and run in docker:
@@ -100,8 +100,8 @@ df -m
 登录数据库：
 
 ```
-docker exec -it story_db bash
-mysql -uroot -p123456 story
+docker exec -it draw_db bash
+mysql -uroot -p123456 draw
 ```
 
 You need setup the whistle config:
