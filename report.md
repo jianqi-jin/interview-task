@@ -2,13 +2,14 @@
 
 ## Architecture
 
+This is a Monorepo based pnpm. Includes this tech stacks:
 - Backend: GoLang
 - API Interface: IDL(IDL based auto generated code)
 - DB: MySQL
 - Frontend: Next, React, TailwindCSS
 - Deploy: Docker, Docker-compose
-- Thirty Parties: cos object storage(for uploading image)
-- Route: Nginx
+- Third Parties: COS object storage(for uploading image)
+- Route and Port Combine: Nginx
 
 ## Pages
 
