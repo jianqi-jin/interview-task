@@ -1,5 +1,15 @@
 # Report
 
+## Architecture
+
+- Backend: GoLang
+- API Interface: IDL(IDL based auto generated code)
+- DB: MySQL
+- Frontend: Next, React, TailwindCSS
+- Deploy: Docker, Docker-compose
+- Thirty Parties: cos object storage(for uploading image)
+- Route: Nginx
+
 ## Pages
 
 #### Landing Page
