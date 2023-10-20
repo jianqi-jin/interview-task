@@ -14,8 +14,6 @@ docker-compose build --no-cache
 docker-compose up
 ```
 
-The contents blow this line are not for running this projet, it is for development.
-
 ## Development
 
 #### run client
