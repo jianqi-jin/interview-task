@@ -4,10 +4,33 @@ export * from "./taskComponents"
 
 /**
  * @description 
+ * @param req
+ */
+export function register(req: components.User) {
+	return webapi.post<components.UserResponse>(`/api/v1/user`, req)
+}
+
+/**
+ * @description 
+ * @param params
+ */
+export function login(params: components.LoginParams) {
+	return webapi.get<components.UserResponse>(`/api/v1/user`, params)
+}
+
+/**
+ * @description 
  * @param params
  */
 export function greet(params: components.RequestParams, name: string) {
 	return webapi.get<components.Response>(`/api/v1/from/${name}`, params)
+}
+
+/**
+ * @description 
+ */
+export function userInfo() {
+	return webapi.get<components.UserResponse>(`/api/v1/user_info`)
 }
 
 /**

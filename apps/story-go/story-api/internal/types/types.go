@@ -25,6 +25,21 @@ type Task struct {
 	Status      int32  `json:"status,optional"`
 }
 
+type User struct {
+	ID         int64  `json:"id,optional"`
+	Username   string `json:"username,optional"`
+	Password   string `json:"password,optional"`
+	CreateTime string `json:"create_time,optional"`
+	UpdateTime string `json:"update_time,optional"`
+	Jwt        string `json:"jwt,optional"`
+	Status     int32  `json:"status,optional"`
+}
+
+type Login struct {
+	Username string `form:"username"`
+	Password string `form:"password"`
+}
+
 type CosCredentials struct {
 	TmpSecretID  string `json:"TmpSecretId,omitempty"`
 	TmpSecretKey string `json:"TmpSecretKey,omitempty"`
@@ -49,6 +64,12 @@ type TaskResponse struct {
 type TasksResponse struct {
 	Message string `json:"message"`
 	Data    []Task `json:"data"`
+}
+
+type UserResponse struct {
+	Message string `json:"message,optional"`
+	Status  int32  `json:"status,optional"` // 0 注册/登录成功 1 账号重复/登录失败
+	User    User   `json:"user,optional"`
 }
 
 type CosCredentialsResponse struct {

@@ -1,9 +1,6 @@
 "use client";
-import "./globals.css";
-import "./reset.css";
+import Header from "@/components/Header";
 import { Inter } from "next/font/google";
-import AppContext from "@/store";
-import User from "@/components/User";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AppContext.Provider>
-          {children}
-          <User />
-        </AppContext.Provider>
+        <Header />
+        {children}
       </body>
     </html>
   );

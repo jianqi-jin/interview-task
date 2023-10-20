@@ -22,6 +22,19 @@ type (
 		ImgUrl      string `json:"img_url,optional"`
 		Status      int32  `json:"status,optional"`
 	}
+	User {
+		ID         int64  `json:"id,optional"`
+		Username   string `json:"username,optional"`
+		Password   string `json:"password,optional"`
+		CreateTime string `json:"create_time,optional"`
+		UpdateTime string `json:"update_time,optional"`
+		Jwt        string `json:"jwt,optional"`
+		Status     int32  `json:"status,optional"`
+	}
+	Login {
+		Username string `form:"username"`
+		Password string `form:"password"`
+	}
 	CosCredentials {
 		TmpSecretID  string `json:"TmpSecretId,omitempty"`
 		TmpSecretKey string `json:"TmpSecretKey,omitempty"`
@@ -44,6 +57,11 @@ type (
 		Message string `json:"message"`
 		Data    []Task `json:"data"`
 	}
+	UserResponse {
+		Message string `json:"message,optional"`
+		Status  int32  `json:"status,optional"` // 0 注册/登录成功 1 账号重复/登录失败
+		User    User   `json:"user,optional"`
+	}
 	CosCredentialsResponse {
 		Message string         `json:"message"`
 		Data    CosCredentials `json:"data"`
@@ -58,10 +76,21 @@ type (
 		Text string `json:"text"`
 	}
 )
+service task-api {
+	@handler RegisterHandler
+	post /api/v1/user(User) returns (UserResponse)
+	@handler LoginHandler
+	get /api/v1/user(Login) returns (UserResponse)
+}
 
+@server (
+	jwt: Auth // 开启 jwt 认证
+)
 service task-api {
 	@handler GreetHandler
 	get /api/v1/from/:name(Request) returns (Response)
+	@handler UserInfoHandler
+	get /api/v1/user_info returns (UserResponse)
 
 	@handler TasksHandler
 	get /api/v1/tasks(TasksRequest) returns (TasksResponse)

@@ -10,24 +10,38 @@ import styles from "./index.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { tasksApi } from "idl/dist/index";
 import { Task } from "idl/dist/idl/taskComponents";
-import { Button, Col, Row, Space, Spin, message } from "antd";
+import { Button, Col, Modal, Row, Slider, Space, Spin, message } from "antd";
 import { getFileMd5, upload } from "@/utils/upload";
 import { RcFile } from "antd/es/upload";
 import MyUpload from "@/components/Upload";
 import { useRequest } from "ahooks";
+import FabricCanvas, { useFabric } from "@/components/Fabric";
+import { Image as FabricImage } from "fabric";
+import History from "@/components/History";
+import { MaskState } from "@/store/Mask";
+import { useContainer } from "unstated-next";
+import useMessage from "antd/es/message/useMessage";
 
 interface DetailPageProps {
   params: { taskId: string };
 }
 
-const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
+const DetailPageInner: React.FC<DetailPageProps> = ({ params }) => {
   const { taskId } = params;
   const query = useSearchParams();
   const router = useRouter();
   const path = usePathname();
   const [task, setTask] = useState<Task>();
-  const [messageApi] = message.useMessage();
+  const [messageApi, contentHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
+  const {
+    maskData,
+    setMaskData,
+    playMaskData,
+    currentStep,
+    totalStep,
+    isPlaying,
+  } = useContainer(MaskState);
   const fetchDetail = () => {
     setLoading(true);
     tasksApi
@@ -39,9 +53,10 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
         setTask(res.data);
       })
       .catch((e) => {
+        console.log(e);
         messageApi.open({
           type: "error",
-          content: e || "请求失败",
+          content: "Request failed.",
         });
       })
       .finally(() => {
@@ -51,41 +66,33 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
   useEffect(() => {
     fetchDetail();
   }, [taskId]);
-  const handleGenerateAudio = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/v1/text2speech", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          text: task?.data || "",
-        }),
-      });
-      const tmpBlob = (await res.blob()) as RcFile;
-      const tmpKey = await getFileMd5(tmpBlob);
-      const uploadRes = await upload({
-        key: tmpKey,
-        file: tmpBlob,
-        onProgress: () => {},
-      });
-      console.log("jjq debug uploadRes", uploadRes);
-      await tasksApi.updateTask({
+  const [saveLoading, setSaveLoading] = useState(false);
+  const handleSave = () => {
+    setSaveLoading(true);
+    const json = canvas?.toJSON();
+    return tasksApi
+      .updateTask({
         task: {
           ...task,
-          audio_link: `/audio/${tmpKey}`,
+          data: JSON.stringify(json),
         },
+      })
+      .catch((e) => {
+        console.log(e);
+        messageApi.open({
+          type: "error",
+          content: "Internet error.",
+        });
+      })
+      .then(() => {
+        messageApi.open({
+          type: "success",
+          content: "Save success.",
+        });
+      })
+      .finally(() => {
+        setSaveLoading(false);
       });
-    } catch (e) {
-      messageApi.error((e as string) || "生成失败");
-    } finally {
-      setLoading(false);
-      fetchDetail();
-    }
-    // tasksApi.textToSpeech({}).then((res) => {
-    //   console.log("jjq debug res", res);
-    // });
   };
   const [showUpload, setShowUpload] = useState(false);
   const handleImgChangeService = (img: string) => {
@@ -101,6 +108,10 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
   useEffect(() => {
     console.log(task?.img_url);
     updateImg(task?.img_url);
+    try {
+      const json = task?.data || "{}";
+      setMaskData(JSON.parse(json));
+    } catch (e) {}
   }, [task]);
   const { run: handleImgChange, loading: updating } = useRequest(
     handleImgChangeService,
@@ -108,47 +119,106 @@ const DetailPage: React.FC<DetailPageProps> = ({ params }) => {
       manual: true,
     }
   );
-  const canvasRef = useRef<HTMLCanvasElement>();
-  const updateImg = (imgUrl: string) => {
-    const ctx = canvasRef.current?.getContext("2d");
-    const img = new Image();
-    img.onload = () => {
-      ctx?.drawImage(img, 0, 0);
-    };
-    img.src = imgUrl;
+  // const canvasRef = useRef<HTMLCanvasElement>(null);
+  const updateImg = (imgUrl?: string) => {
+    if (!imgUrl) return;
+    FabricImage.fromURL(imgUrl).then((oImg: FabricImage) => {
+      canvas!.backgroundImage = oImg;
+      canvas?.renderAll();
+      // canvas?.add(oImg);
+    });
+  };
+  const readingTimer = useRef<NodeJS.Timeout>();
+  const { FabricCanvas, canvas, createCanvas, canvasRef } = useFabric();
+  useEffect(() => {
+    if (readingTimer.current) {
+      return;
+    }
+    console.log("Writing canvas");
+    canvas?.loadFromJSON(maskData).then(() => {
+      canvas?.renderAll();
+    });
+  }, [maskData]);
+  const handleCanvasChange = (canvasData: any) => {
+    console.log("Reading canvas");
+    clearTimeout(readingTimer.current);
+    readingTimer.current = setTimeout(() => {
+      readingTimer.current = undefined;
+    }, 6e2);
+    console.log("canvasData", canvasData);
+    setMaskData(canvasData);
+  };
+  const handleClear = () => {
+    setMaskData({});
+  };
+  const handleDownload = () => {
+    let a = document.createElement("a");
+    let dt =
+      canvas?.toDataURL({
+        // @ts-ignore
+        format: "png",
+        quality: 1,
+      }) || "";
+    a.href = dt;
+    a.download = "canvas.png";
+    a.click();
   };
   return (
     <div className={styles.DetailPageWrapper}>
-      <Spin spinning={loading || updating}>
-        {/* <Button onClick={handleGenerateAudio}>生成语音</Button> */}
-        {/* <ul className="w-[800px] mx-auto">
-          {task &&
-            Object.keys(task).map((key) => {
-              const value = task[key as keyof Task];
-              return (
-                <Row
-                  className="shadow-lg rounded-lg mb-5 p-3 overflow-scroll"
-                  key={key}
-                >
-                  <Col span={4}>{key}</Col>
-                  <Col span={20}>{value}</Col>
-                </Row>
-              );
-            })}
-        </ul> */}
-        <canvas width={800} height={800} ref={canvasRef}></canvas>
-        <Space size={8}>
-          <Button type="primary" onClick={handleGenerateAudio}>
-            Save Task
-          </Button>
-          {showUpload ? (
-            <MyUpload onSuccess={handleImgChange} />
-          ) : (
-            <Button onClick={() => setShowUpload(true)}>Upload Image</Button>
-          )}
-        </Space>
+      {contentHolder}
+      <Spin spinning={loading || updating || saveLoading}>
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-col">
+            <div>
+              {isPlaying ? (
+                <div>
+                  <h3>
+                    Playing {currentStep} / {totalStep}
+                  </h3>
+                  <Slider value={currentStep} max={totalStep} step={1} />
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+            <FabricCanvas
+              canvas={canvas}
+              canvasRef={canvasRef}
+              onChange={handleCanvasChange}
+            />
+          </div>
+          <div className="flex flex-col">
+            <History />
+            <div className="flex flex-col"></div>
+            <Space size={8}>
+              <Button type="primary" danger onClick={handleClear}>
+                Clear Canvas
+              </Button>
+              <Button type="primary" onClick={handleSave}>
+                Save Task
+              </Button>
+              <Button type="primary" onClick={playMaskData}>
+                Replay process
+              </Button>
+              <Button type="primary" onClick={handleDownload}>
+                Download
+              </Button>
+              <Modal open={showUpload} onCancel={() => setShowUpload(false)}>
+                <MyUpload onSuccess={handleImgChange} />
+              </Modal>
+              <Button onClick={() => setShowUpload(true)}>Upload Image</Button>
+            </Space>
+          </div>
+        </div>
       </Spin>
     </div>
+  );
+};
+const DetailPage: typeof DetailPageInner = ({ ...args }) => {
+  return (
+    <MaskState.Provider>
+      <DetailPageInner {...args} />
+    </MaskState.Provider>
   );
 };
 

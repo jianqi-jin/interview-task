@@ -113,3 +113,9 @@ interview.org/ localhost:3000/
 
 
 And open this link to review this project: http://interview.org/
+
+Fabric
+
+6.0.0-beta4 for SSR
+
+5.x 需要修改next-config

@@ -10,6 +10,7 @@ import styles from "./index.module.scss";
 import CreateTask from "./CreateTask";
 import {
   Button,
+  Image,
   Select,
   Space,
   Spin,
@@ -43,7 +44,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
     AppContext.useContainer();
   const [editInfo, setEditInfo] = useState<Task>();
   const createRef = useRef({
-    setIsOpen: (val: boolean) => {}
+    setIsOpen: (val: boolean) => {},
   });
   useEffect(() => {
     fetchStories();
@@ -81,85 +82,82 @@ const Dashboard: React.FC<DashboardProps> = () => {
         );
       },
     },
+    // {
+    //   key: "task",
+    //   title: "task",
+    //   dataIndex: "data",
+    //   width: 200,
+    //   render: (val) => {
+    //     return (
+    //       <Typography.Paragraph
+    //         className={styles.task}
+    //         ellipsis={{
+    //           rows: 2,
+    //           tooltip: {
+    //             overlayClassName: styles.taskTooltip,
+    //           },
+    //         }}
+    //       >
+    //         {val}
+    //       </Typography.Paragraph>
+    //     );
+    //   },
+    // },
     {
-      key: "task",
-      title: "task",
-      dataIndex: "data",
-      width: 200,
-      render: (val) => {
-        return (
-          <Typography.Paragraph
-            className={styles.task}
-            ellipsis={{
-              rows: 2,
-              tooltip: {
-                overlayClassName: styles.taskTooltip,
-              },
-            }}
-          >
-            {val}
-          </Typography.Paragraph>
-        );
-      },
-    },
-    {
-      key: "audio_link",
-      title: "audio_link",
-      dataIndex: "audio_link",
+      key: "img_url",
+      title: "img_url",
+      dataIndex: "img_url",
       render: (val, record) => {
         return (
           <div>
-            <audio controls>
-              <source src={record.audio_Url} />
-              Your browser does not support the audio element.
-            </audio>
+            <Image width={80} src={record.img_url} alt="" />
           </div>
         );
       },
     },
-    {
-      key: "status",
-      title: "status",
-      dataIndex: "status",
-      render: (status: TaskStatus, values) => {
-        return (
-          <>
-            <Select
-              bordered={false}
-              // showArrow={false}
-              style={{ width: 150 }}
-              value={status}
-              onChange={async (val) => {
-                try {
-                  await tasksApi.updateTask({
-                    task: {
-                      ...values,
-                      status: val,
-                    },
-                  });
-                } finally {
-                  fetchStories();
-                }
-              }}
-            >
-              {statusOptions.map((item) => (
-                <Select.Option
-                  key={item.id}
-                  title={item.label}
-                  value={item.value}
-                >
-                  <div>
-                    <Tag color={TagColor[item.value as TaskStatus]}>
-                      {item.label}
-                    </Tag>
-                  </div>
-                </Select.Option>
-              ))}
-            </Select>
-          </>
-        );
-      },
-    },
+    // {
+    //   key: "status",
+    //   title: "status",
+    //   dataIndex: "status",
+    //   render: (status: TaskStatus, values) => {
+    //     return (
+    //       <>
+    //         <Select
+    //           bordered={false}
+    //           // showArrow={false}
+    //           style={{ width: 150 }}
+    //           value={status}
+    //           onChange={async (val) => {
+    //             try {
+    //               await tasksApi.updateTask({
+    //                 task: {
+    //                   ...values,
+    //                   status: val,
+    //                 },
+    //               });
+    //             } finally {
+    //               fetchStories();
+    //             }
+    //           }}
+    //         >
+    //           {statusOptions.map((item) => (
+    //             <Select.Option
+    //               key={item.id}
+    //               title={item.label}
+    //               value={item.value}
+    //             >
+    //               <div>
+    //                 <Tag color={TagColor[item.value as TaskStatus]}>
+    //                   {item.label}
+    //                 </Tag>
+    //               </div>
+    //             </Select.Option>
+    //           ))}
+    //         </Select>
+    //       </>
+    //     );
+    //   },
+    // },
     // {
     //   key: "updateTime",
     //   title: "updateTime",
@@ -212,7 +210,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
               >
                 删除
               </Button>
-              <Button 
+              <Button
                 key="detail"
                 onClick={() => router.push(`/admin/detail/${rows.id}`)}
               >
@@ -235,7 +233,11 @@ const Dashboard: React.FC<DashboardProps> = () => {
       />
       <div className="rounded-md overflow-hidden border border-black/5 p-8">
         <Spin spinning={tasksLoading}>
-          <Table columns={columns} rowKey={row => String(row.id)} dataSource={tasks} />
+          <Table
+            columns={columns}
+            rowKey={(row) => String(row.id)}
+            dataSource={tasks}
+          />
         </Spin>
       </div>
     </div>

@@ -8,11 +8,34 @@ import { Task } from 'idl/dist/idl/taskComponents';
  * @description store/index.ts
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createContainer } from 'unstated-next';
+import { useCookieState } from 'ahooks';
+import { UserStatus } from '@/interface';
+import { usePathname } from 'next/navigation';
 
 const useAppContext = () => {
   const [count, setCount] = useState(0);
+  const [userName, setUserName] = useState('');
+  const path = usePathname();
+  const [jwt, setJwt] = useCookieState("jwt", {
+    defaultValue: "",
+  });
+  const goLanding = () => {
+    path !== '/landing' && (location.href = '/landing');
+  };
+  useEffect(() => {
+    tasksApi.userInfo().then(res => {
+      if (res.status === UserStatus.Success) {
+        setUserName(res?.user?.username || '');
+      } else {
+        goLanding();
+      }
+    }).catch(e => {
+      goLanding();
+    })
+  }, []);
+  const [showLogin, setShowLogin] = useState(false);
   const [tasksLoading, setStoriesLoading] = useState(true);
   const [tasks, setStories] = useState<Task[]>([]);
   const fetchStories = () => {
@@ -30,7 +53,11 @@ const useAppContext = () => {
     setCount,
     fetchStories,
     tasks,
-    tasksLoading
+    tasksLoading,
+    setShowLogin,
+    showLogin,
+    jwt, setJwt,
+    userName
   };
 };
 

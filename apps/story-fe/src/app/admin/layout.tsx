@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * @file AdminLayout
@@ -6,8 +6,8 @@
  * @description AdminLayout
  */
 
-import AppContext from "@/store";
 import Header from "@/components/Header";
+import User from "@/components/User";
 
 interface AdminLayoutProps {
   children: any;
@@ -17,14 +17,12 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   // return <>{children}</>;
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-shrink-0 flex-grow-0">
-        <Header />
-      </div>
-      <div className="flex-shrink-1 flex-grow-0 overflow-scroll">
-        <AppContext.Provider>
+        <div className="flex-shrink-0 flex-grow-0">
+          <Header />
+        </div>
+        <div className="flex-shrink-1 flex-grow-0 overflow-scroll">
           {children}
-        </AppContext.Provider>
-      </div>
+        </div>
     </div>
   );
 };

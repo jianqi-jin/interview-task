@@ -49,6 +49,7 @@ const MyUpload: React.FC<{ value?: string; onChange?: any; onSuccess?: (key: str
       multiple={false}
       fileList={fileList}
       action=""
+      accept="image/*"
       customRequest={handleUpload}
       onChange={async (info) => {
         let newFileList = [info.file];

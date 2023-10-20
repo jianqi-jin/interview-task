@@ -1,3 +1,7 @@
 Name: task-api
 Host: 0.0.0.0
 Port: 8888
+Timeout: 600000
+Auth:
+  AccessSecret: TestAccessSecret
+  AccessExpire: 600000

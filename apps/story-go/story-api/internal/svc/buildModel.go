@@ -38,3 +38,27 @@ func BuildTaskDB(instance *types.Task) *model.Task {
 		//UpdateTime:  time.Now().UTC(),
 	}
 }
+
+func BuildUser(instance *model.User) *types.User {
+	return &types.User{
+		ID:         instance.ID,
+		Username:   instance.Username,
+		Status:     instance.Status,
+		Password:   instance.Password,
+		CreateTime: strconv.FormatInt(instance.CreateTime.Unix(), 10),
+		UpdateTime: strconv.FormatInt(instance.UpdateTime.Unix(), 10),
+		Jwt:        "",
+	}
+}
+
+func BuildUserDB(instance *types.User) *model.User {
+	return &model.User{
+		Username: instance.Username,
+		Password: instance.Password,
+		Status:   instance.Status,
+		//Channel:     "",
+		//Source:      "",
+		//CreateTime:  instance.CreateTime,
+		//UpdateTime:  time.Now().UTC(),
+	}
+}

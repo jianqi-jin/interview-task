@@ -26,6 +26,23 @@ export interface Task {
 	status?: number
 }
 
+export interface User {
+	id?: number
+	username?: string
+	password?: string
+	create_time?: string
+	update_time?: string
+	jwt?: string
+	status?: number
+}
+
+export interface Login {
+}
+export interface LoginParams {
+	username: string
+	password: string
+}
+
 export interface CosCredentials {
 	TmpSecretId?: string
 	TmpSecretKey?: string
@@ -52,6 +69,12 @@ export interface TaskResponse {
 export interface TasksResponse {
 	message: string
 	data: Array<Task>
+}
+
+export interface UserResponse {
+	message?: string
+	status?: number // 0 注册/登录成功 1 账号重复/登录失败
+	user?: User
 }
 
 export interface CosCredentialsResponse {

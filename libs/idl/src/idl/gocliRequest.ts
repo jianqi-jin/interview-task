@@ -1,3 +1,5 @@
+import Cookies = require("js-cookie");
+
 export type Method =
     | 'get'
     | 'GET'
@@ -68,11 +70,13 @@ export async function request({
     data?: unknown;
     config?: unknown;
 }) {
+    const jwt = Cookies.get('jwt');
     const response = await fetch('http://localhost:8888' + url, {
         method: method.toLocaleUpperCase(),
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': jwt
         },
         body: data ? JSON.stringify(data) : undefined,
         // @ts-ignore
@@ -110,20 +114,20 @@ function api<T>(
 }
 
 export const webapi = {
-    get<T>(url: string, req: unknown, config?: unknown): Promise<T> {
-        return api<T>('get', url, req, config);
+    get<T>(url: string, req?: unknown, config?: unknown): Promise<T> {
+        return api<T>('get', url, req || {}, config);
     },
-    delete<T>(url: string, req: unknown, config?: unknown): Promise<T> {
-        return api<T>('delete', url, req, config);
+    delete<T>(url: string, req?: unknown, config?: unknown): Promise<T> {
+        return api<T>('delete', url, req || {}, config);
     },
-    put<T>(url: string, req: unknown, config?: unknown): Promise<T> {
-        return api<T>('put', url, req, config);
+    put<T>(url: string, req?: unknown, config?: unknown): Promise<T> {
+        return api<T>('put', url, req || {}, config);
     },
-    post<T>(url: string, req: unknown, config?: unknown): Promise<T> {
-        return api<T>('post', url, req, config);
+    post<T>(url: string, req?: unknown, config?: unknown): Promise<T> {
+        return api<T>('post', url, req || {}, config);
     },
-    patch<T>(url: string, req: unknown, config?: unknown): Promise<T> {
-        return api<T>('patch', url, req, config);
+    patch<T>(url: string, req?: unknown, config?: unknown): Promise<T> {
+        return api<T>('patch', url, req || {}, config);
     }
 };
 
