@@ -45,7 +45,7 @@ const FabricCanvas = ({
     if (!canvasRef.current) {
       return;
     }
-    const onSectionChange = ({ e }) => {
+    const onSectionChange = () => {
       onChange?.(canvas?.toJSON());
     };
     canvas?.on("after:render", onSectionChange);

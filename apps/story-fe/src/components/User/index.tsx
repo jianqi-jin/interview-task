@@ -6,7 +6,7 @@ import { useCookieState } from "ahooks";
 import { Button, Form, Input, Modal, message } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { tasksApi } from "idl";
-import { User } from "idl/dist/idl/taskComponents";
+import { LoginParams, User } from "idl/dist/idl/taskComponents";
 import { useState } from "react";
 import { useContainer } from "unstated-next";
 
@@ -17,7 +17,7 @@ const User = () => {
   const handleSubmit = (values: User) => {
     setIsLoading(true);
     const api = isLogin ? tasksApi.login : tasksApi.register;
-    api(values)
+    api(values as LoginParams)
       .then((res) => {
         if (res.status != UserStatus.Success) {
           return Promise.reject(res.status);
