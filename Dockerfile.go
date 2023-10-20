@@ -15,7 +15,7 @@ COPY apps/story-go/story-api /go/src/
 # COPY apps/story-go/story-api/go.mod apps/story-go/story-api/go.sum apps/story-go/story-api/*.go /go/src/
 WORKDIR "/go/src/"
 RUN go env -w GO111MODULE=on \
-  # && go env -w GOPROXY=https://goproxy.cn,direct \
+  && go env -w GOPROXY=https://goproxy.cn,direct \
   # && go env -w GOPROXY=https://goproxy.io,direct \
   && go env -w GOOS=linux \
   && go env -w GOARCH=amd64 \
